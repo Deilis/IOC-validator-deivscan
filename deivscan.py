@@ -316,6 +316,7 @@ def perform_bulk_analysis(iocs, output_file_path):
                         malicious_score = report_vt_ip['data']['attributes']['last_analysis_stats']['malicious']
                         total_score = sum(report_vt_ip['data']['attributes']['last_analysis_stats'].values())
                         vt_result = f"   {ip} Malicious {malicious_score}/{total_score} Vendor Score"
+                        print(vt_result)
                         write_to_file(output_file_path, vt_result)
                     if report_abuseipdb:
                         write_to_file(output_file_path, report_abuseipdb)
