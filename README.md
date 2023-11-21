@@ -103,7 +103,12 @@ Output file that script provides:**
 10. Performance optimization?
 
 ### Version History:
-- V1: VirusTotal, AbuseIPDB and MalwareBazaar interaction.
+- V1  : [11/19/2023]:
+                  ~ VirusTotal, AbuseIPDB and MalwareBazaar interaction.
+- V1.1: [11/21/2023]:
+                  ~ Updated Error from AbuseIPDB when variable `country_code` is `None`. Error was happening because responses was not containing `country_code` since some of the IPs that I was querring was private and had no associated country information. Modification was made to give out default value of `N/A` if the `country_code` (or any other field) is not presented in the response, thus preventing the script from attempting to concatenate `None` with a string. 
+                  ~ Added a counter in terminal to display which IOC is currently being validated from given IOCs with `enumerate` function in Python. Modification `enumerate` was used to iterate over each category of IOCs, and `count` is the counter that keeps track of the current number of IOCs being processed. `start=1` argument ensures that counting starts from 1 instead of default 0. The `len(entries)` part was used to display the total number of IOCs in the current `category` being processed.
+                  ~ Added expressions for IPs, URLs/Domains and Hashes so if there's no IOC naming it would check IOCs using regex functions `def is_ip` (simple IP address regex), `def_is_url` (URL regex pattern to match various URL formats) and `def is_hash` (Hash regex for common hash formats SHA1, SHA256, MD5) 
 
 ### Troubleshooting
 If you encounter any issues:

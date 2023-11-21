@@ -2,6 +2,7 @@ import requests
 import sys 
 import os 
 import time
+import re
 
 #Requests - HTTP requests to the VirusTotal API
 #sys - system-specific parameters and functions
@@ -106,21 +107,21 @@ def get_abuseipdb_report(ip):
         'Key': abuseipdb_api_key
     }
     response = requests.get(url=url, headers=headers, params=params)
-    if response.status_code == 200:
+   if response.status_code == 200:
         abuseipdb_response = response.json()['data']
-        ip_address = abuseipdb_response.get('ipAddress')
-        abuse_score = abuseipdb_response.get('abuseConfidenceScore')
-        country_code = abuseipdb_response.get('countryCode')
-        isp = abuseipdb_response.get('isp')
-        istor = abuseipdb_response.get('isTor')
-        total_reports = abuseipdb_response.get('totalReports')
+        ip_address = abuseipdb_response.get('ipAddress', 'N/A')
+        abuse_score = abuseipdb_response.get('abuseConfidenceScore', 'N/A')
+        country_code = abuseipdb_response.get('countryCode', 'N/A')
+        isp = abuseipdb_response.get('isp', 'N/A')
+        istor = abuseipdb_response.get('isTor', 'N/A')
+        total_reports = abuseipdb_response.get('totalReports', 'N/A')
 
-        print(f"   IP: " + ip_address)
-        print(f"   Abuse Score: " + str(abuse_score))
-        print(f"   Total Reports: " + str(total_reports))
-        print(f"   ISP: " + isp)
-        print(f"   Country: " + country_code)
-        print(f"   TOR IP: " + str(istor))
+        print(f"   IP: {ip_address}")
+        print(f"   Abuse Score: {abuse_score}")
+        print(f"   Total Reports: {total_reports}")
+        print(f"   ISP: {isp}")
+        print(f"   Country: {country_code}")
+        print(f"   TOR IP: {istor}")
 
         result = (f"   Abuse Score: {abuse_score}\n   Total Reports: {total_reports}\n   Country: {country_code}\n   ISP: {isp}\n   Tor IP: {istor}\n ")
         return result
@@ -248,16 +249,30 @@ def validate_iocs():
         else:
             print("\nInvalid option, please select again.")
 
+#File parser and regex expressions to check for IOCs
+def is_ip(s):
+    return re.match(r"^\d{1,3}(\.\d{1,3}){3}$", s) is not None
+
+def is_url(s):
+    return re.match(r"(https?://)?[a-zA-Z0-9-]+(\.[a-zA-Z]{2,})+", s) is not None
+
+def is_hash(s):
+    return re.match(r"^[a-fA-F0-9]{32}$|^[a-fA-F0-9]{40}$|^[a-fA-F0-9]{64}$", s) is not None
+
 #Parses the bulk IOCs from a given string 'content'.
 def parse_bulk_iocs(content):
     iocs = {'ips': [], 'urls': [], 'hashes': []}
-    current_key = None
     for line in content.splitlines():
         line = line.strip()
-        if line.endswith(':'):
-            current_key = line[:-1].lower()
-        elif current_key:
-            iocs[current_key].append(line)
+        if line:
+            if is_ip(line):
+                iocs['ips'].append(line)
+            elif is_url(line):
+                iocs['urls'].append(line)
+            elif is_hash(line):
+                iocs['hashes'].append(line)
+            else:
+                print(f"Sorry we were unable to recognize IOC format: {line}")
     return iocs
 
 #Performs analysis on bulk IOCs and writes the results to 'output_file_path'.
