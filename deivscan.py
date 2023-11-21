@@ -311,13 +311,13 @@ def perform_bulk_analysis(iocs, output_file_path):
                 for ip in entries:
                     print(f"\nScanning IP: {ip}")
                     report_vt_ip = get_ip_report(ip)
-                    report_abuseipdb = get_abuseipdb_report(ip)
                     if report_vt_ip:
                         malicious_score = report_vt_ip['data']['attributes']['last_analysis_stats']['malicious']
                         total_score = sum(report_vt_ip['data']['attributes']['last_analysis_stats'].values())
                         vt_result = f"   {ip} Malicious {malicious_score}/{total_score} Vendor Score"
                         print(vt_result)
                         write_to_file(output_file_path, vt_result)
+                    report_abuseipdb = get_abuseipdb_report(ip)
                     if report_abuseipdb:
                         write_to_file(output_file_path, report_abuseipdb)
                     time.sleep(16)
