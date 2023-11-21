@@ -1,10 +1,21 @@
-# IOC validation tool
+# Description
 
-This Python script facilitates interactions with multiple cybersecurity APIs including VirusTotal, MalwareBazaar, and AbuseIPDB. It's designed for security analysts, researchers, and enthusiasts who require automated querying and data retrieval from these services.
+This Python script is designed for security analysts, researchers, and enthusiasts, facilitating automated interactions with multiple cybersecurity APIs including VirusTotal, MalwareBazaar, and AbuseIPDB. The tool automates the process of sending HTTP requests to these platforms, handling requests and responses effectively. It is particularly useful for quickly gathering and analyzing data related to file hashes, IP addresses, or domain information, thereby streamlining tasks in cybersecurity analysis and research.
 
-## Description
-
-This tool automates the process of sending HTTP requests to different cybersecurity APIs. It handles requests and responses effectively, allowing users to quickly gather and analyze data from VirusTotal, MalwareBazaar, and AbuseIPDB. It's particularly useful for checking file hashes, IP addresses, or domain information.
+## Table of Contents
+- [Description](#description)
+- [Features](#features)
+- [Getting Started](#getting-started)
+  - [Dependencies](#dependencies)
+  - [Installation](#installation)
+  - [Setting Up](#setting-up)
+  - [API Keys Configuration](#api-keys-configuration)
+- [Usage](#usage)
+- [Future Improvements](#future-improvements)
+- [Version History](#version-history)
+- [Troubleshooting](#troubleshooting)
+- [Flow Chart](#flow-chart)
+- [Big thanks!](#big-thanks)
 
 ## Features
 
@@ -89,32 +100,41 @@ Output file that script provides:**
 
 ![image](https://github.com/Deilis/deivscan/assets/80956337/aabd8f0f-c66e-4786-af2a-9c8061b369ad)
 
-### Future Improvements 
+## Future Improvements 
 
-1. Improvment logging mechanisms to record the script operations.
-2. Function seperation from main script.
-3. Enhance error handling to manage and respod to various exceptions or API errors.
-4. Integration of additional cybersecurity-related APIs to provide more comprehensive data analysis.
-5. Different types of data, like threat intelligence feedds, DNS query information, SSL certificate details.
-6. Implementation of asynchronus to handle multiple API requests more efficiently.
-7. API managment system for API keys and other sensitive information instead of hardcoding them into the script.
-8. Command-line arguments to make the script more flexible by allowing users to specify parameters and options when running script.
-9. Web interface (Flask/Django) or GUI (Tkinter/PyQt)?
-10. Performance optimization?
+- [ ] Improvment logging mechanisms to record the script operations.
+- [ ] Function seperation from main script.
+- [ ] Enhance error handling to manage and respod to various exceptions or API errors.
+- [ ] Integration of additional cybersecurity-related APIs to provide more comprehensive data analysis.
+- [ ] Different types of data, like threat intelligence feedds, DNS query information, SSL certificate details.
+- [ ] Implementation of asynchronus to handle multiple API requests more efficiently.
+- [ ] API managment system for API keys and other sensitive information instead of hardcoding them into the script.
+- [ ] Command-line arguments to make the script more flexible by allowing users to specify parameters and options when running script.
+- [ ] Web interface (Flask/Django) or GUI (Tkinter/PyQt)?
+- [ ] Performance optimization?
 
-### Version History:
-- V1  : [11/19/2023]:
-                  ~ VirusTotal, AbuseIPDB and MalwareBazaar interaction.
-- V1.1: [11/21/2023]:
-                  ~ Updated Error from AbuseIPDB when variable `country_code` is `None`. Error was happening because responses was not containing `country_code` since some of the IPs that I was querring was private and had no associated country information. Modification was made to give out default value of `N/A` if the `country_code` (or any other field) is not presented in the response, thus preventing the script from attempting to concatenate `None` with a string. 
-                  ~ Added a counter in terminal to display which IOC is currently being validated from given IOCs with `enumerate` function in Python. Modification `enumerate` was used to iterate over each category of IOCs, and `count` is the counter that keeps track of the current number of IOCs being processed. `start=1` argument ensures that counting starts from 1 instead of default 0. The `len(entries)` part was used to display the total number of IOCs in the current `category` being processed.
-                  ~ Added expressions for IPs, URLs/Domains and Hashes so if there's no IOC naming it would check IOCs using regex functions `def is_ip` (simple IP address regex), `def_is_url` (URL regex pattern to match various URL formats) and `def is_hash` (Hash regex for common hash formats SHA1, SHA256, MD5) 
+## Version History:
+**V1  : [11/19/2023]:**
 
-### Troubleshooting
+VirusTotal, AbuseIPDB and MalwareBazaar interaction.
+
+**V1.1: [11/21/2023]:**
+
+Updated Error from AbuseIPDB when variable `country_code` is `None`. Error was happening because responses was not containing `country_code` since some of the IPs that I was querring was private and had no associated country information. Modification was made to give out default value of `N/A` if the `country_code` (or any other field) is not presented in the response, thus preventing the script from attempting to concatenate `None` with a string.
+
+Added a counter in terminal to display which IOC is currently being validated from given IOCs with `enumerate` function in Python. Modification `enumerate` was used to iterate over each category of IOCs, and `count` is the counter that keeps track of the current number of IOCs being processed. `start=1` argument ensures that counting starts from 1 instead of default 0. The `len(entries)` part was used to display the total number of IOCs in the current `category` being processed.
+
+Added expressions for IPs, URLs/Domains and Hashes so if there's no IOC naming it would check IOCs using regex functions `def is_ip` (simple IP address regex), `def_is_url` (URL regex pattern to match various URL formats) and `def is_hash` (Hash regex for common hash formats SHA1, SHA256, MD5) 
+
+## Troubleshooting
 If you encounter any issues:
 
 1. Ensure all dependencies are correctly installed.
 2. Verify that the API keys are correctly set in the script.
 3. Check if there are any error messages in the console and address them accordingly.
 
-### Big thanks!
+## Flow Chart
+
+![image](https://github.com/Deilis/IOC-validator-deivscan/assets/80956337/63306aa4-43a4-4361-960e-ed05d89d0d3b)
+
+## Big thanks!
