@@ -116,6 +116,7 @@ Output file that script provides:**
 - [ ] Enable command-line arguments to make the script more flexible by allowing users to specify parameters and options when running the script. **[Ongoing]**
 - [ ] Explore the development of a web interface (Flask/Django) or GUI (Tkinter/PyQt) to make the tool more accessible to users who prefer graphical interfaces.
 - [ ] Optimize performance to handle large volumes of IOCs with minimal latency.
+- [ ] CSV file output by users choice.
 - [x] Input sanitization to remove unnecessary port numbers and other artifacts. **[Completed 12/03/2023]**
 
 ## Version History:
