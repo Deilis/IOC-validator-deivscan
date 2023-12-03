@@ -132,10 +132,11 @@ Added a counter in terminal to display which IOC is currently being validated fr
 Added expressions for IPs, URLs/Domains and Hashes so if there's no IOC naming it would check IOCs using regex functions `def is_ip` (simple IP address regex), `def_is_url` (URL regex pattern to match various URL formats) and `def is_hash` (Hash regex for common hash formats SHA1, SHA256, MD5) 
 
 **V1.2: [12/03/2023]**
-Implemented a modular design by seperating functions into different modules, enhancing code maintainability and scalability.
-Added input sanitization features to strip port numbers from IP addresses and URLs/Domains to ensure correct data formating for API requests.
-Improved error handling across the script to provide clearer debugging information.
-Enhanced the user experience by providing a more interactive prompt and clearer instructions for usage.
+
+Implemented a modular design by seperating functions into different modules, enhancing code maintainability and scalability.<br>
+Added input sanitization features to strip port numbers from IP addresses and URLs/Domains to ensure correct data formating for API requests.<br>
+Improved error handling across the script to provide clearer debugging information.<br>
+Enhanced the user experience by providing a more interactive prompt and clearer instructions for usage.<br>
 Refactored code to impove performance and readability.
 
 ## Troubleshooting
