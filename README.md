@@ -24,6 +24,8 @@ This Python script is designed for security analysts, researchers, and enthusias
 - **AbuseIPDB Lookup**: Quickly look up and analyze the reputation of IP addresses.
 - **User-friendly Configuration**: Simple setup with API key configuration and easy-to-use functions.
 - **Extensible Framework**: Designed for easy addition of more APIs or enhancement of existing functionalities.
+- **Modular Design**: Functions are now separated into different modules for better maintainability and scalability. [12/03/2023]
+- **Input Sanitization**: Enhanced input processing to remove unnecessary port numbers and other artifacts. [12/03/2023]
 
 ## Getting Started
 
@@ -60,7 +62,7 @@ This Python script is designed for security analysts, researchers, and enthusias
 
 ### Setting Up
 
-Replace the API keys in the script with your own obtained from VirusTotal, MalwareBazaar, and AbuseIPDB.
+Replace the API keys in the `api/api_keys.py`  with your own obtained from VirusTotal, MalwareBazaar, and AbuseIPDB.
 
 ### API Keys Configuration
 
@@ -73,8 +75,8 @@ The script requires API keys for VirusTotal, MalwareBazaar, and AbuseIPDB. Follo
 
 2. **Configure the Script**:
 
-   - Open the `deivscan.py` file in a text editor.
-   - Locate the lines where the API keys are set (usually at the top of the file).
+   - Open the `api/api_keys.py` file in a text editor.
+   - First three lines are for API keys [VirusTotal, MalwareBazaar and AbuseiPDB].
    - Replace the placeholder values with your actual API keys.
 
 ### Usage
@@ -102,16 +104,19 @@ Output file that script provides:**
 
 ## Future Improvements 
 
-- [ ] Improvment logging mechanisms to record the script operations.
-- [ ] Function seperation from main script.
-- [ ] Enhance error handling to manage and respod to various exceptions or API errors.
-- [ ] Integration of additional cybersecurity-related APIs to provide more comprehensive data analysis.
-- [ ] Different types of data, like threat intelligence feedds, DNS query information, SSL certificate details.
-- [ ] Implementation of asynchronus to handle multiple API requests more efficiently.
-- [ ] API managment system for API keys and other sensitive information instead of hardcoding them into the script.
-- [ ] Command-line arguments to make the script more flexible by allowing users to specify parameters and options when running script.
-- [ ] Web interface (Flask/Django) or GUI (Tkinter/PyQt)?
-- [ ] Performance optimization?
+## Future Improvements 
+
+- [ ] Implement logging mechanisms to record the script operations for better traceability and debugging.
+- [x] Separate functions from the main script into modules for improved maintainability. **[Completed 12/03/2023]**
+- [x] Enhance error handling to manage and respond to various exceptions or API errors more gracefully. **[Completed 12/03/2023]**
+- [ ] Integrate additional cybersecurity-related APIs to provide more comprehensive data analysis. **[Searching for reliable Vendors]**
+- [ ] Add support for different types of data, like threat intelligence feeds, DNS query information, and SSL certificate details.
+- [ ] Implement asynchronous handling to manage multiple API requests more efficiently.
+- [x] Develop an API management system for API keys and other sensitive information to avoid hardcoding them into the script. **[Parly Completed 12/03/2023]**
+- [ ] Enable command-line arguments to make the script more flexible by allowing users to specify parameters and options when running the script. **[Ongoing]**
+- [ ] Explore the development of a web interface (Flask/Django) or GUI (Tkinter/PyQt) to make the tool more accessible to users who prefer graphical interfaces.
+- [ ] Optimize performance to handle large volumes of IOCs with minimal latency.
+- [x] Input sanitization to remove unnecessary port numbers and other artifacts. **[Completed 12/03/2023]**
 
 ## Version History:
 **V1  : [11/19/2023]:**
@@ -125,6 +130,13 @@ Updated Error from AbuseIPDB when variable `country_code` is `None`. Error was h
 Added a counter in terminal to display which IOC is currently being validated from given IOCs with `enumerate` function in Python. Modification `enumerate` was used to iterate over each category of IOCs, and `count` is the counter that keeps track of the current number of IOCs being processed. `start=1` argument ensures that counting starts from 1 instead of default 0. The `len(entries)` part was used to display the total number of IOCs in the current `category` being processed.
 
 Added expressions for IPs, URLs/Domains and Hashes so if there's no IOC naming it would check IOCs using regex functions `def is_ip` (simple IP address regex), `def_is_url` (URL regex pattern to match various URL formats) and `def is_hash` (Hash regex for common hash formats SHA1, SHA256, MD5) 
+
+**V1.2: [12/03/2023]**
+Implemented a modular design by seperating functions into different modules, enhancing code maintainability and scalability.
+Added input sanitization features to strip port numbers from IP addresses and URLs/Domains to ensure correct data formating for API requests.
+Improved error handling across the script to provide clearer debugging information.
+Enhanced the user experience by providing a more interactive prompt and clearer instructions for usage.
+Refactored code to impove performance and readability.
 
 ## Troubleshooting
 If you encounter any issues:

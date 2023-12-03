@@ -1,0 +1,4 @@
+Urls:
+   hxxps://able-alert-poppy[.]glitch[.]me/mask[.]html Malicious 17/90 Vendor Score
+   hxxps://viral-telegram-2023-7527[.]real1[.]biz[.]id/ Malicious 20/90 Vendor Score
+   hxxps://viral-telegram-2023-8765[.]real1[.]biz[.]id/hello Malicious 20/90 Vendor Score
