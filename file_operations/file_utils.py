@@ -1,6 +1,7 @@
 import sys
 import re
 import os
+import json
 
 #Makes sure that directories input_files and output_files are created, if not creates them
 def ensure_directory_exists(directory):
@@ -25,6 +26,10 @@ def write_to_file(file_name, data, category=None):
     output_directory = os.path.join(os.path.dirname(__file__), '..', 'output_files')
     file_path = os.path.join(output_directory, file_name)
     ensure_directory_exists(output_directory)
+
+    if isinstance(data, dict):
+        data = json.dumps(data, indent=4)
+
     sanitized_data = sanitize_output(data)
     with open(file_path, 'a') as f:
         if category:
@@ -44,9 +49,10 @@ def clean_input(content):
 
 #Replaces [ ., https, http] with [ [.], hxxps, hxxp] in output files to be deweoponized 
 def sanitize_output(data):
-    data = data.replace('.', '[.]')
-    data = data.replace('http', 'hxxp')
-    data = data.replace('https', 'hxxps')
+    if not isinstance(data, dict) and not data.startswith('{'):
+        data = data.replace('.', '[.]')
+        data = data.replace('http', 'hxxp')
+        data = data.replace('https', 'hxxps')
     return data
 
 #File parser and regex expressions to check for IOCs

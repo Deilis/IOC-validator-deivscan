@@ -14,6 +14,7 @@ This Python script is designed for security analysts, researchers, and enthusias
 - [Future Improvements](#future-improvements)
 - [Version History](#version-history)
 - [Troubleshooting](#troubleshooting)
+- [Testing](#testing)
 - [Flow Chart](#flow-chart)
 - [Big thanks!](#big-thanks)
 
@@ -134,18 +135,32 @@ Added expressions for IPs, URLs/Domains and Hashes so if there's no IOC naming i
 
 **V1.2: [12/03/2023]**
 
-Implemented a modular design by seperating functions into different modules, enhancing code maintainability and scalability.<br>
-Added input sanitization features to strip port numbers from IP addresses and URLs/Domains to ensure correct data formating for API requests.<br>
-Improved error handling across the script to provide clearer debugging information.<br>
-Enhanced the user experience by providing a more interactive prompt and clearer instructions for usage.<br>
+Implemented a modular design by seperating functions into different modules, enhancing code maintainability and scalability.
+
+Added input sanitization features to strip port numbers from IP addresses and URLs/Domains to ensure correct data formating for API requests.
+
+Improved error handling across the script to provide clearer debugging information.
+
+Enhanced the user experience by providing a more interactive prompt and clearer instructions for usage.
+
 Refactored code to impove performance and readability.
 
+Added `project_test/test_script.py` to test script, output of testing is in `output_files`.
+
 ## Troubleshooting
-If you encounter any issues:
+Encountering issues? Here's how to troubleshoot common problems:
+
+- API Key Authentication: If you receive a "Status Code: 401" error, this typically means there's an issue with your API keys. Double-check that they are correctly entered in api/api_keys.py and have the necessary permissions.
+- Installation Issues: Make sure all dependencies are correctly installed by running pip install -r requirements.txt.
+- Runtime Errors: If the script exits unexpectedly or provides incorrect results, review the console output for error messages. This can often lead to a quick resolution.
 
 1. Ensure all dependencies are correctly installed.
 2. Verify that the API keys are correctly set in the script.
 3. Check if there are any error messages in the console and address them accordingly.
+
+## Testing
+
+For testing check `project_tests/test_script.py`, output is given in `output_files/test_output.txt`
 
 ## Flow Chart
 
